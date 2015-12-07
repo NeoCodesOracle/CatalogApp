@@ -1,0 +1,13 @@
+{% extends "main.html" %}
+{% block content %}
+
+<h1>Enter New Category Name</h1>
+
+<form action="{{url_for('addCategory')}}" method = 'POST'>
+<p>Name:<input type='text' size='30' name='name'></p>
+<p>Img Url:<input type='text' size='30' name='img_url'></p>
+<input type='submit' value='Create Category'>
+</form>
+<a href = "{{url_for('showCategories')}}">Cancel</a>
+
+{% endblock %}

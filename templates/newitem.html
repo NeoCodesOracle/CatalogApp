@@ -1,0 +1,16 @@
+<html>
+<body>
+
+<h3>ENTER NEW ITEM FOR {{category.name}}</h3>
+<hr />
+
+<form action="{{url_for('addItem', newItemCategory_id = category.id )}}" method = 'POST'>
+Name:<input type='text' size='35' name='name'><br />
+Description:<input type='text' size='35' name='description'><br />
+Price:<input type='text' size='35' name='price'><br />
+Image Url:<input type='text' size='35' name='img_url'><br />
+<input type='submit' value='Create'>
+</form>
+
+</body>
+</html>

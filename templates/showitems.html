@@ -1,0 +1,81 @@
+{% extends "main.html" %}
+{% block content %}
+
+<div class="container">
+<div class="row">
+		<div class="col-sm-3">
+			<a href='{{url_for('showCategories')}}'>
+				<h4><span class="glyphicon glyphicon-th-list"></span> Back to Categories</h4>
+			</a>
+		</div>
+		<div class="col-sm-2">
+			<a href='{{url_for('addItem', newItemCategory_id = category.id)}}'>
+				<h4><span class="glyphicon glyphicon-plus-sign"></span> Add New Item</h4>
+			</a>
+		</div>
+</div>
+</div>
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for message in messages %}
+			  <div class="alert alert-success">
+			  	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			  	<strong>SUCCESS! {{ message }}</strong>
+			  </div>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+
+{% for item in items %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-2">
+			<img class="item-img" src="{{item.img_url}}" />
+		</div>
+		<div class="col-sm-10">
+			<div class="inner-container-fluid">
+			<div class="item-name">{{item.name}}</div>
+				<div class="row">
+					<div class="col-sm-1 tag">
+						<p><a href="#nogo" data-toggle="tooltip" title="Item ID">
+							<span class="glyphicon glyphicon-barcode"></span>
+							</a> : {{item.id}}
+						</p>
+					</div>
+					<div class="col-sm-2 tag">
+						<p><a href="#nogo" data-toggle="tooltip" title="Price">
+							<span class="glyphicon glyphicon-tag"></span>
+							</a> : {{item.price}}
+						</p>
+					</div>
+				</div>
+				<div class="item-desc">
+					{{item.description}}
+				</div>
+				<div class="row navbar-text navbar-right">
+					<a href='{{url_for('deleteItem', category_id = category.id, item_id = item.id)}}'>
+                  <span class="glyphicon glyphicon-remove pull-right mod-links"></span>
+                </a>
+                <a href='{{url_for('editItem', category_id = category.id, item_id = item.id)}}'>
+                  <span class="glyphicon glyphicon-pencil pull-right mod-links"></span>
+                </a>
+                <!--
+					<a href='{{url_for('editItem', category_id = category.id, item_id = item.id)}}' class="navbar-link" data-toggle="tooltip" title="Edit Item">
+						<span class="glyphicon glyphicon-pencil"></span></a>
+					<a href='{{url_for('deleteItem', category_id = category.id, item_id = item.id)}}' class="navbar-link" data-toggle="tooltip" title="Delete Item">
+						<span class="glyphicon glyphicon-remove-sign"></span>
+					</a>
+				-->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% else %}
+<div class="alert alert-danger">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>This category does not contain any items.</strong>
+ </div>
+{% endfor %}
+
+{% endblock %}

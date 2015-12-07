@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Online Sports Catalog</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/catalog.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/hover.css')}}" media="all">
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <style>
+  /* Remove the navbar's default rounded borders and increase the bottom margin */ 
+  body {
+      font-family: "Roboto", Verdana, Sans-serif;
+    }
+  .navbar {
+    margin-bottom: 50px;
+    border-radius: 0;
+    }
+/* Remove the jumbotron's default bottom margin and set new height */ 
+  .jumbotron {
+      background-color: #332F2E;
+      margin-bottom: 0;
+      height: 150px;
+    }
+  .panel-body {
+      padding: 0px;
+    }
+/* Add a gray background color and some padding to the footer */
+  footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+      width: 100%;
+    }
+  .panel-primary {
+      border-color: #393433;
+      box-shadow: 2px 2px 2px #888888;
+    }
+  .panel-primary .panel-heading {
+      font-family: Verdana, "Sans-serif";
+      font-weight: bold;
+      border-color: #393433;
+      color: #FFF;
+      background-color: #393433;
+      border-color: #393433;
+    }
+  </style>
+</head>
+<body>
+<div class="jumbotron">
+  <div class="container text-center">
+    <div class="title hvr-push">CHAMPIONS</div><br />
+    <small>Internet Sports Catalog</small>
+  </div>
+</div>
+
+<!-- BEGIN OUR PAGES MAIN NAVIGATION -->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href='{{url_for('showCategories')}}'>Home</a></li>
+        <li><a href='{{url_for('showCategories')}}'>Categories</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="hvr-glow"><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- END MAIN NAVIGATION -->
+{% block content %}
+{% endblock %}
+
+<div class"container">
+  <div class="row">
+    <footer class="container text-center">
+      <p>Search category or item by name</p>
+      <form class="form-inline">  
+        <input type="email" class="form-control" size="30" placeholder="Enter search term here">
+        <button type="button" class="btn btn-info">Find it</button>
+      </form>
+    </footer>
+  </div>
+</div>
+
+</body>
+</html>

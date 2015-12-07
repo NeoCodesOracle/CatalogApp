@@ -1,0 +1,27 @@
+small {
+  color: #ffffff;
+  height: 25px;
+}
+.title {
+  color: #ffffff;
+  font-size: 50px;
+  font-family: Georgia;
+  font-weight: 800;
+  text-shadow: 3px 3px 1px #000000;
+}
+.subtitle {
+  color: #ffffff;
+  font-size: 20px;
+}
+.jumbotron {
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.mod-links {
+  padding-left: 5px;
+  padding-right: 10px;
+  padding-top: 4px;
+  padding-bottom: 6px;
+}
+
