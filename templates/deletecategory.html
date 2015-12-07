@@ -1,6 +1,8 @@
 {% extends "main.html" %}
 {% block content %}
 
+<!--
+<br />
 <div class"container-fluid">
   <div class="row">
   	<div class="col">
@@ -14,20 +16,18 @@
        </form>
   </div>
 </div>
-
-<!-- 
-{#
-<div class="container-fluid text-center">
-<h4>Are you sure you want to delete {{category.name}} from categories?</h4>
-
-<form action="{{url_for('deleteCategory', category_id=category.id)}}" method = 'POST'>
-<input type='submit' value='Delete Category'>
-<a href = "{{url_for('showCategories')}}">Cancel</a>
-</p>
-</form>
-</div>
-#}
 -->
+
+<div class="container-fluid text-center">
+<h3>Are you sure you want to delete {{category.name}} from categories?</h3>
+
+<form class="form-inline" action="{{url_for('deleteCategory', category_id=category.id)}}" method = 'POST'>
+	<input type="submit" class="btn btn-danger" value='Delete Category'>
+</form>
+<br />
+<p>Or <a href = "{{url_for('showCategories')}}">Cancel</a> to go back to categories.</p>
+</div>
+
 <br /><br />
 
 {% endblock %}
