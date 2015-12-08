@@ -37,7 +37,7 @@
     {# Test index after 3rd iteration to close out row #}
     {% if (loop.index % 3) == 0 %}
       </div>
-    {# If we are at the end of the list we need to pad remaining columns - if needed #}
+    {# If we are at the end of the list pad remaining columns - if needed #}
     {% elif ((loop.length + 1) - loop.index) == 0 %}
       {%for number in range( 3 - ((loop.length + 1) % 3)) %}
         <div class="col-sm-4"></div>

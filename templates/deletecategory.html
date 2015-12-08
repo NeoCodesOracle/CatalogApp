@@ -1,6 +1,5 @@
 {% extends "main.html" %}
 {% block content %}
-
 <div class="container-fluid text-center">
 <h3>Are you sure you want to delete {{category.name}} from categories?</h3>
 <br />
@@ -10,7 +9,5 @@
 <br />
 <p>Or <a href = "{{url_for('showCategories')}}">Cancel</a> to go back to categories.</p>
 </div>
-
 <br /><br />
-
 {% endblock %}

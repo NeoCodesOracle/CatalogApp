@@ -1,16 +1,58 @@
-<html>
-<body>
+{% extends "main.html" %}
+{% block content %}
+<div class="container-fluid">
+	<div class="row text-center">
+		<h3>Add new item.</h3><br />
+	</div>
+	<div class="row">
+		<form class="form-horizontal" action="{{url_for('addItem', newItemCategory_id = category.id )}}" method = 'POST'>
+		<div class="form-group">
+			<label for="itemName" class="col-sm-4 control-label">Name</label>
+			<div class="col-sm-5">
+				<input name="name" type="text" class="form-control" placeholder="Enter new item name">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="price" class="col-sm-4 control-label">Price</label>
+			<div class="col-sm-5">
+				<input name="price" type="text" class="form-control" placeholder="Enter new item price">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="description" class="col-sm-4 control-label">Description</label>
+			<div class="col-sm-5">
+				<textarea name="description" type="text" class="form-control col-sm-3" 
+					rows="5" placeholder="Enter new item description here."></textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="imgUrl" class="col-sm-4 control-label">Image Url</label>
+			<div class="col-sm-5">
+				<input name="img_url" type="url" class="form-control" placeholder="Enter name for new category">
+				<br />
+		</div>
+		<div class="form-group">
+			<div class="col-sm-9">
+				<input type="submit" class="btn btn-primary pull-right" value="Edit Category">
+			</div>
+		</div>
+		</form>
+	</div>
+	<div class="row text-center">
+		<p>Or <a href="{{url_for('showCategories')}}">Cancel</a> to go back to categories.</p>
+	</div>
+</div>
+{% endblock %}
+<!--
 
 <h3>ENTER NEW ITEM FOR {{category.name}}</h3>
 <hr />
 
 <form action="{{url_for('addItem', newItemCategory_id = category.id )}}" method = 'POST'>
-Name:<input type='text' size='35' name='name'><br />
+
 Description:<input type='text' size='35' name='description'><br />
 Price:<input type='text' size='35' name='price'><br />
 Image Url:<input type='text' size='35' name='img_url'><br />
 <input type='submit' value='Create'>
 </form>
-
-</body>
-</html>
+-->
