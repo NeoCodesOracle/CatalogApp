@@ -38,7 +38,7 @@
 	</form>
 	</div>
 	<div class="row text-center">
-		<p>Or <a href = "{{url_for('showCategories')}}">Cancel</a> to go back to categories.</p>
+		<p>Or <a href = "{{url_for('showItems', category_id = item.category_id)}}">Cancel</a> to go back to items.</p>
 	</div>
 </div>
 {% endblock %}
