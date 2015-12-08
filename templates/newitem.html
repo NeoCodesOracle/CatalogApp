@@ -1,11 +1,12 @@
 {% extends "main.html" %}
 {% block content %}
-<div class="container-fluid">
-	<div class="row text-center">
-		<h3>Add new item</h3><br />
-	</div>
-	<div class="row">
+<div class="container">
+	<div class="panel panel-default">
+  		<div class="panel-heading">
+			<h3 class="text-center">Add new item</h3>
+		</div>
 		<form class="form-horizontal" action="{{url_for('addItem', newItemCategory_id = category.id )}}" method = 'POST'>
+			<br />
 		<div class="form-group">
 			<label for="itemName" class="col-sm-4 control-label">Name</label>
 			<div class="col-sm-5">
@@ -38,8 +39,9 @@
 		</div>
 		</form>
 	</div>
-	<div class="row text-center">
-		<p>Or <a href="{{url_for('showItems', category_id = category.id)}}">Cancel</a> to go back to items.</p>
+	<div class="panel-footer">
+		<p class="text-center">Or <a href="{{url_for('showItems', category_id = category.id)}}">Cancel</a> to go back to items</p>
+	</div>
 	</div>
 </div>
 {% endblock %}

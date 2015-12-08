@@ -1,7 +1,17 @@
 {% extends "main.html" %}
 {% block content %}
 
-<div class="container">
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+		{% for message in messages %}
+		  <div class="alert alert-success">
+		  	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		  	<strong>SUCCESS! {{ message }}</strong>
+		  </div>
+		{% endfor %}
+	{% endif %}
+{% endwith %}
+<div class="container-fluid">
 <div class="row">
 		<div class="col-sm-3">
 			<a href='{{url_for('showCategories')}}'>
@@ -15,16 +25,7 @@
 		</div>
 </div>
 </div>
-	{% with messages = get_flashed_messages() %}
-		{% if messages %}
-			{% for message in messages %}
-			  <div class="alert alert-success">
-			  	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			  	<strong>SUCCESS! {{ message }}</strong>
-			  </div>
-			{% endfor %}
-		{% endif %}
-	{% endwith %}
+
 
 {% for item in items %}
 <div class="container-fluid">
@@ -37,15 +38,13 @@
 			<div class="item-name">{{item.name}}</div>
 				<div class="row">
 					<div class="col-sm-1 tag">
-						<p><a href="#nogo" data-toggle="tooltip" title="Item ID">
-							<span class="glyphicon glyphicon-barcode"></span>
-							</a> : {{item.id}}
+						<p>
+							<span class="glyphicon glyphicon-barcode"></span>: {{item.id}}
 						</p>
 					</div>
 					<div class="col-sm-2 tag">
-						<p><a href="#nogo" data-toggle="tooltip" title="Price">
-							<span class="glyphicon glyphicon-tag"></span>
-							</a> : {{item.price}}
+						<p>
+							<span class="glyphicon glyphicon-tag"></span>: {{item.price}}
 						</p>
 					</div>
 				</div>
@@ -59,13 +58,6 @@
                 <a href='{{url_for('editItem', category_id = category.id, item_id = item.id)}}'>
                   <span class="glyphicon glyphicon-pencil pull-right mod-links"></span>
                 </a>
-                <!--
-					<a href='{{url_for('editItem', category_id = category.id, item_id = item.id)}}' class="navbar-link" data-toggle="tooltip" title="Edit Item">
-						<span class="glyphicon glyphicon-pencil"></span></a>
-					<a href='{{url_for('deleteItem', category_id = category.id, item_id = item.id)}}' class="navbar-link" data-toggle="tooltip" title="Delete Item">
-						<span class="glyphicon glyphicon-remove-sign"></span>
-					</a>
-				-->
 				</div>
 			</div>
 		</div>
