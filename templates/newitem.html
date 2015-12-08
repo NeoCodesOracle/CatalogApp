@@ -2,7 +2,7 @@
 {% block content %}
 <div class="container-fluid">
 	<div class="row text-center">
-		<h3>Add new item.</h3><br />
+		<h3>Add new item</h3><br />
 	</div>
 	<div class="row">
 		<form class="form-horizontal" action="{{url_for('addItem', newItemCategory_id = category.id )}}" method = 'POST'>
@@ -33,7 +33,7 @@
 		</div>
 		<div class="form-group">
 			<div class="col-sm-9">
-				<input type="submit" class="btn btn-primary pull-right" value="Edit Category">
+				<input type="submit" class="btn btn-primary pull-right" value="Add Item">
 			</div>
 		</div>
 		</form>
