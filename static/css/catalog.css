@@ -36,3 +36,7 @@ small {
     max-width: 100%;
     height: auto;
 }
+.item-img {
+    display: block;
+    max-width: 176px;
+}
