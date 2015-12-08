@@ -24,4 +24,15 @@ small {
   padding-top: 4px;
   padding-bottom: 6px;
 }
-
+.panel {
+  margin-bottom: 20px;
+  background-color: #FFF;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05);
+}
+.img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
