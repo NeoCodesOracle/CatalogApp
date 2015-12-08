@@ -2,7 +2,7 @@
 {% block content %}
 <div class="container-fluid">
 	<div class="row text-center">
-		<h3>Do you want to edit {{category.name}} category?</h3>
+		<h3>Do you want to edit {{category.name}} category?</h3><br />
 	</div>
 	<div class="row">
 		<form class="form-horizontal" action="{{url_for('editCategory', category_id = category.id)}}" method = "POST">
@@ -28,7 +28,6 @@
 	<div class="row text-center">
 		<p>Or <a href = "{{url_for('showCategories')}}">Cancel</a> to go back to categories.</p>
 	</div>
-	
 </div>
 
 {% endblock %}

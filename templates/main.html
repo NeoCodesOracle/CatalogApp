@@ -50,12 +50,14 @@
   </style>
 </head>
 <body>
+<!-- BEGIN MAIN HEADER -->
 <div class="jumbotron">
   <div class="container text-center">
     <div class="title hvr-push">CHAMPIONS</div><br />
     <small>Internet Sports Catalog</small>
   </div>
 </div>
+<!-- END MAIN HEADER -->
 
 <!-- BEGIN OUR PAGES MAIN NAVIGATION -->
 <nav class="navbar navbar-inverse">
@@ -70,8 +72,9 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href='{{url_for('showCategories')}}'>Home</a></li>
-        <li><a href='{{url_for('showCategories')}}'>Categories</a></li>
+        <li class="active"><a href='{{url_for('showCategories')}}'>All Categories</a></li>
+        <li><a href = "{{url_for('addCategory')}}">
+          <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Category</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="hvr-glow"><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;Login</a></li>
@@ -80,7 +83,12 @@
   </div>
 </nav>
 <!-- END MAIN NAVIGATION -->
+
+<!-- BEGIN PAGE MAIN CONTENT -->
 {% block content %}
 {% endblock %}
+<!-- END PAGE MAIN CONTENT -->
+<br />
+
 </body>
 </html>

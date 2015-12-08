@@ -107,10 +107,10 @@ def editItem(category_id, item_id):
 	if request.method == 'POST':
 		if request.form['name']:
 			itemToEdit.name=request.form['name']
-		if request.form['description']:
-			itemToEdit.description=request.form['description']
 		if request.form['price']:
 			itemToEdit.price=request.form['price']
+		if request.form['description']:
+			itemToEdit.description=request.form['description']
 		if request.form['img_url']:
 			itemToEdit.img_url=request.form['img_url']
 		session.add(itemToEdit)
