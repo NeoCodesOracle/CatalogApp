@@ -1,6 +1,5 @@
 {% extends "main.html" %}
 {% block content %}
-
 <div class="container">
 	<div class="row">
 	<form class="form-horizontal" action="{{url_for('editItem', category_id = item.category_id, item_id = item.id)}}" method = 'POST'>
@@ -13,13 +12,14 @@
 		<div class="form-group">
 			<label for="inputPassword3" class="col-sm-3 control-label">Price</label>
 			<div class="col-sm-6">
-				<input name="price" type="text" class="form-control" id="inputPassword3" placeholder="Enter new price">
+				<input name="price" type="text" class="form-control" id="inputPassword3" placeholder="{{item.price}}">
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="inputPassword3" class="col-sm-3 control-label">Description</label>
 			<div class="col-sm-6">
-				<input name="description" type="text" class="form-control" id="inputPassword3" placeholder="Enter new description">
+				<textarea name="description" type="text" class="form-control col-sm-3" 
+					rows="5" placeholder="{{item.description}}"></textarea>
 			</div>
 		</div>
 		<div class="form-group">
@@ -41,17 +41,4 @@
 		<p>Or <a href = "{{url_for('showCategories')}}">Cancel</a> to go back to categories.</p>
 	</div>
 </div>
-<!--
-<h1>Do you want to edit {{item.name}}?</h1>
-
-<form action="{{url_for('editItem', category_id = item.category_id, item_id = item.id)}}" method = 'POST'>
-	<p>Name:<input type='text' size='30' name='name' placeholder='{{item.name}}'><br />
-	Description:<input type='text' size='35' name='description' placeholder='{{item.description}}'><br />
-	Price:<input type='text' size='35' name='price' placeholder='{{item.price}}'><br />
-	Image Url:<input type='text' size='35' name='img_url' placeholder='{{item.img_url}}'><br />
-	<input type='submit' value='Edit Item'>
-<a href = "{{url_for('showCategories')}}">Cancel</a>
-</p>
-</form>
--->
 {% endblock %}
