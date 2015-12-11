@@ -36,7 +36,22 @@ small {
     max-width: 100%;
     height: auto;
 }
-.item-img {
-    display: block;
-    max-width: 176px;
+.item-image {
+    padding-top: 10px;
+    height: 175px;
+}
+.thumbnail {
+    min-height: 475px;
+}
+.bttmrt {
+    position:absolute;
+    bottom:20px;
+    right:25px;
+}
+.copy {
+    font-size: 12px;
+    padding: 0px 7px 30px 7px;
+}
+.img-circle, .cat-img {
+    max-height: 164px;
 }
