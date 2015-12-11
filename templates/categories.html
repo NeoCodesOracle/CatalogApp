@@ -23,7 +23,7 @@
             <div class="panel-heading">{{category.name}}</div>
               <div class="panel-body">
                 <a href='{{url_for('showItems', category_id = category.id)}}'>
-                  <img src="{{category.img_url}}" class="img-responsive" style="width:100%" alt="{{category.name}} Image">
+                  <img src="{{category.img_url}}" class="img-responsive cat-img" style="width:100%" alt="{{category.name}} Image">
                 </a>
               </div>
                 <a href='{{url_for('deleteCategory', category_id = category.id)}}'>
