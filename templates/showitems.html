@@ -1,6 +1,6 @@
 {% extends "main.html" %}
 {% block content %}
-
+<div class="container">
 {% with messages = get_flashed_messages() %}
 	{% if messages %}
 		{% for message in messages %}
@@ -11,63 +11,67 @@
 		{% endfor %}
 	{% endif %}
 {% endwith %}
-<div class="container-fluid">
-<div class="row">
-		<div class="col-sm-3">
-			<a href='{{url_for('showCategories')}}'>
-				<h4><span class="glyphicon glyphicon-th-list"></span> Back to Categories</h4>
-			</a>
-		</div>
-		<div class="col-sm-2">
-			<a href='{{url_for('addItem', newItemCategory_id = category.id)}}'>
-				<h4><span class="glyphicon glyphicon-plus-sign"></span> Add New Item</h4>
-			</a>
-		</div>
 </div>
-</div>
-
-
-{% for item in items %}
-<div class="container-fluid">
+    
+<div class="container">
 	<div class="row">
-		<div class="col-sm-2">
-			<img class="item-img" src="{{item.img_url}}" />
-		</div>
-		<div class="col-sm-10">
-			<div class="inner-container-fluid">
-			<div class="item-name">{{item.name}}</div>
-				<div class="row">
-					<div class="col-sm-1 tag">
-						<p>
-							<span class="glyphicon glyphicon-barcode"></span>: {{item.id}}
-						</p>
-					</div>
-					<div class="col-sm-2 tag">
-						<p>
-							<span class="glyphicon glyphicon-tag"></span>: {{item.price}}
-						</p>
-					</div>
-				</div>
-				<div class="item-desc">
-					{{item.description}}
-				</div>
-				<div class="row navbar-text navbar-right">
-					<a href='{{url_for('deleteItem', category_id = category.id, item_id = item.id)}}'>
-                  <span class="glyphicon glyphicon-remove pull-right mod-links"></span>
-                </a>
-                <a href='{{url_for('editItem', category_id = category.id, item_id = item.id)}}'>
-                  <span class="glyphicon glyphicon-pencil pull-right mod-links"></span>
-                </a>
-				</div>
-			</div>
-		</div>
+		<ul class="nav nav-pills text-center">
+ 			<li role="presentation"><a href="{{url_for('showCategories')}}">
+				<span class="glyphicon glyphicon-list">
+				</span>&nbsp;Back to Categories</a>
+			</li>
+  			<li role="presentation"><a href="{{url_for('addItem', newItemCategory_id = category.id)}}">
+				<span class="glyphicon glyphicon-plus-sign">
+				</span>&nbsp;Add New Item</a>
+			</li>
+		</ul><br />
 	</div>
+	{% for item in items %}
+	{# Test index for beginning of road and if so, output opening div #}
+    {% if (loop.index % 3) == 1 %}
+      <div class="row">
+    {% endif %}
+    		<div class="col-md-4">
+    				<div class="thumbnail">
+    					<img src="{{item.img_url}}" alt="{{item.name}}Image" class="item-img" />
+    					 <div class="caption">
+        					<h4 class="text-center">{{item.name}}</h4>
+        					<p class="text-center">
+								<span class="glyphicon glyphicon-barcode"></span>: {{item.id}}
+								&nbsp;
+								<span class="glyphicon glyphicon-tag"></span>: {{item.price}}
+							</p>
+        				</div>
+        				<p class="copy text-justify">{{item.description}}</p>
+        				<p class="bttmrt">
+        					<a href="{{url_for('editItem', category_id = category.id, item_id = item.id)}}" 
+        					class="btn btn-default" role="button">
+        					<span class="glyphicon glyphicon-pencil text-primary"></span>&nbsp;Edit
+        					</a>
+        					<a href='{{url_for('deleteItem', category_id = category.id, item_id = item.id)}}'
+        					class="btn btn-default" role="button">
+        					<span class="glyphicon glyphicon-remove text-danger"></span>&nbsp;Delete
+        					</a>
+        				</p>
+        			</div>
+    		</div>
+    {# Test index , every 3rd iteration we need to close out row #}
+    {% if (loop.index % 3) == 0 %}
+      </div>
+    {# If we are at the end of the list and  pad remaining columns - if needed #}
+    {% elif ((loop.length + 1) - loop.index) == 0 %}
+      {% for number in range( 3 - ((loop.length + 1) % 3)) %}
+        <div class="col-sm-4"></div>
+      {% endfor %}
+      </div>
+    {% endif %}
+
+  	{% else %} {# If category, is empty let the user know #}
+    <div class="alert alert-danger">
+    	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    	<strong>This category does not contain any items.</strong>
+ 	</div>
+  	{% endfor %}
 </div>
-{% else %}
-<div class="alert alert-danger">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>This category does not contain any items.</strong>
- </div>
-{% endfor %}
 
 {% endblock %}
