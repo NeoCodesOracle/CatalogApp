@@ -1,14 +1,51 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 app = Flask(__name__)
 
 from sqlalchemy import create_engine, asc, desc
 from sqlalchemy.orm import sessionmaker
 from catalog_database import Base, User, Category, Item
 
+# IMPORTS FOR SESSION MANAGEMENT
+from flask import session as login_session
+import random, string
+
 engine=create_engine('sqlite:///catalog.db')
 
 DBSession=sessionmaker(bind=engine)
 session=DBSession()
+
+
+@app.route('/login')
+def showLogin():
+	state = ''.join(random.choice(string.ascii_uppercase + string.digits)
+		for x in xrange(32))
+	login_session['state'] = state
+	# RENDER LOGIN TEMPLATE
+	return render_template('login.html')
+
+# JSON APIs to view Category Information
+@app.route('/categories/<int:category_id>/categoryItems/JSON')
+def categoryItemsJSON(category_id):
+    '''Returns JSON objects for all items matching category_id'''	
+    category = session.query(Category).filter_by(id=category_id).one()
+    items = session.query(Item).filter_by(
+        category_id=category.id).all()
+    return jsonify(Items=[i.serialize for i in items])
+
+
+@app.route('/category/<int:category_id>/item/<int:item_id>/JSON')
+def categoryItemJSON(category_id, item_id):
+	'''Returns JSON representation for a single item matching item_id'''
+	category_item = session.query(Item).filter_by(id=item_id).one()
+	return jsonify(Item=category_item.serialize)
+
+
+@app.route('/categories/JSON')
+def categoriesJSON():
+	'''Returns JSON objects for all categories in catalog'''
+	categories = session.query(Category).all()
+	return jsonify(Catergories=[c.serialize for c in categories])
+# END JSON APIs
 
 
 @app.route('/')
