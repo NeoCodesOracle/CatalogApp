@@ -72,7 +72,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#nogo"><img style="max-width:100px; margin-top: -3px;" src="../static/images/logo.png"></a>
+      <a class="navbar-brand" href="#nogo"><img src="{{url_for('static', filename='./images/logo.png')}}" style="max-width:100px; margin-top: -3px;" ></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -87,12 +87,13 @@
   </div>
 </nav>
 <!-- END MAIN NAVIGATION -->
-
 <!-- BEGIN PAGE MAIN CONTENT -->
-{% block content %}
-{% endblock %}
+  <div class="container">
+  {% block content %}
+
+  {% endblock %}
+  </div>
 <!-- END PAGE MAIN CONTENT -->
 <br />
-
 </body>
 </html>

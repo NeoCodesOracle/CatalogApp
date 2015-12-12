@@ -1,6 +1,6 @@
 {% extends "main.html" %}
 {% block content %}
-
+<div class"row">
 {% with messages = get_flashed_messages() %}
     {% if messages %}
       {% for message in messages %}
@@ -11,8 +11,7 @@
       {% endfor %}
     {% endif %}
 {% endwith %}
-
-<div class="container">
+  </div>
   {% for category in categories %}
     {# Test index for beginning of road and if so, output opening div #}
     {% if (loop.index % 3) == 1 %}
@@ -62,5 +61,4 @@
       </form>
     </footer>
   </div>
-</div>
 {% endblock %}

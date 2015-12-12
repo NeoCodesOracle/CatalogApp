@@ -2,12 +2,13 @@
 <html>
 <head>
   	<!--LOAD PRE-REQUISITES FOR GOOGLE SIGN IN -->
-   	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<script src="//apis.google.com/js/platform.js?onload=start"></script>
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<!-- END PRE-REQUISITES FOR GOOGLE SIGN IN -->
 </head>
 <body>  
+  <div class="row">
 <!-- GOOGLE PLUS SIGN IN-->
 <div id="signInButton">
 	<span class="g-signin"
@@ -28,7 +29,7 @@ function signInCallback(authResult) {
   if (authResult['code']) {
     // Hide the sign-in button now that the user is authorized
     $('#signinButton').attr('style', 'display: none');
-    // Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the main restaurants page
+    // Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the main categories page
     $.ajax({
       type: 'POST',
       url: '/gconnect?state={{STATE}}',
@@ -40,7 +41,7 @@ function signInCallback(authResult) {
         if (result) {
           $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
          setTimeout(function() {
-          window.location.href = "/restaurant";
+          window.location.href = "/categories";
          }, 4000);
           
       } else if (authResult['error']) {
@@ -92,7 +93,7 @@ function signInCallback(authResult) {
         if (result) {
           $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
          setTimeout(function() {
-          window.location.href = "/restaurant";
+          window.location.href = "/categories/";
          }, 4000);
           
       } else {
@@ -118,6 +119,6 @@ function signInCallback(authResult) {
         </button>
 <!--END FACEBOOK SIGN IN -->
 
-
+</div>
 </body>
 </html>
