@@ -15,6 +15,9 @@ import json
 from flask import make_response
 import requests
 
+# IMPORTS FOR DECORATOR
+from functools import wraps
+
 
 CLIENT_ID = json.loads(
     open('client_secrets.json', 'r').read())['web']['client_id']
@@ -195,6 +198,20 @@ def showLogin():
 	return render_template('newlogin.html', STATE=state, 
 		login_session=login_session)
 
+
+# Decorator function to require login
+def login_required(f):
+    """
+    Decorator function -- forces user to login by redirecting to login page.
+    """
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'user_id' not in login_session:
+            return redirect(url_for('showLogin', next=request.url))
+        return f(*args, **kwargs)
+    return decorated_function	
+
+
 # JSON APIs to view Category Information
 @app.route('/categories/<int:category_id>/categoryItems/JSON')
 def categoryItemsJSON(category_id):
@@ -242,12 +259,11 @@ def showCategories():
 
 
 @app.route('/categories/new/', methods=['GET', 'POST'])
+@login_required
 def addCategory():
 	'''
 	Adds a new category to the existing database.
 	'''
-	if 'username' not in login_session:
-		return redirect('/login')
 	if request.method == 'POST':
 		if request.form['name']:
 			newCategory=Category(name=request.form['name'], img_url=request.form['img_url'],
@@ -261,12 +277,11 @@ def addCategory():
 
 
 @app.route('/categories/<int:category_id>/edit/', methods=['GET', 'POST'])
+@login_required
 def editCategory(category_id):
 	'''
 	Makes changes to an existing category in the database.
 	'''
-	if 'username' not in login_session:
-		return redirect('/login')
 	editedCategory=session.query(Category).filter_by(id=category_id).one()
 	if editedCategory.user_id != login_session['user_id']:
 		flash("You cannot edit this category. Catergories can only be modified by their owners. Create a category of your own to modify.")
@@ -286,12 +301,11 @@ def editCategory(category_id):
 
 
 @app.route('/categories/<int:category_id>/delete/', methods=['GET','POST'])
+@login_required
 def deleteCategory(category_id):
 	'''
 	Removes an existing category from the database.
 	'''
-	if 'username' not in login_session:
-		return redirect('/login')
 	categoryToDelete=session.query(Category).filter_by(id=category_id).one()
 	if categoryToDelete.user_id != login_session['user_id']:
 		flash("You cannot delete this category. Catergories can only be deleted by their owners.")
@@ -322,12 +336,11 @@ def showItems(category_id):
 
 @app.route('/categories/<int:newItemCategory_id>/new/',
 	methods=['GET','POST'])
+@login_required
 def addItem(newItemCategory_id):
 	'''
 	Adds an item to category matching newItemCategory_id.
 	'''
-	if 'username' not in login_session:
-		return redirect('/login')
 	category=session.query(Category).filter_by(
 		id=newItemCategory_id).one()
 	if login_session['user_id'] != category.user_id:
@@ -339,7 +352,8 @@ def addItem(newItemCategory_id):
 			description=request.form['description'],
 			price=request.form['price'],
 			img_url=request.form['img_url'],
-			category_id=category.id)
+			category_id=category.id,
+			user_id=category.user_id)
 		session.add(newItem)
 		session.commit()
 		flash("A new item has been added to this category.")
@@ -351,12 +365,11 @@ def addItem(newItemCategory_id):
 
 @app.route('/categories/<int:category_id>/<int:item_id>/edit/',
 	methods=['GET','POST'])
+@login_required
 def editItem(category_id, item_id):
 	'''
 	Edits item with matching item_id.
 	'''
-	if 'username' not in login_session:
-		return redirect('/login')
 	itemToEdit=session.query(Item).filter_by(id=item_id).one()
 	belongsToCategory=session.query(Category).filter_by(
 		id=itemToEdit.category_id).one()
@@ -383,16 +396,17 @@ def editItem(category_id, item_id):
 
 @app.route('/categories/<int:category_id>/<int:item_id>/delete/',
 	methods=['GET','POST'])
+@login_required
 def deleteItem(category_id, item_id):
 	'''
 	Removes item matching item_id from database.
 	'''
-	if 'username' not in login_session:
-		return redirect('/login')
 	itemToDelete=session.query(Item).filter_by(id=item_id).one()
+	belongsToCategory=session.query(Category).filter_by(
+		id=category_id).one()
 	if login_session['user_id'] != itemToDelete.user_id:
 		flash("Only the owner of %s category may remove this item." % belongsToCategory.name)
-		return redirect(url_for('showItems', category_id=belongsToCategory.id))
+		return redirect(url_for('showItems', category_id=category_id))
 	if request.method == 'POST':
 		session.delete(itemToDelete)
 		session.commit()
