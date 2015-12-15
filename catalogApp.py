@@ -115,7 +115,7 @@ def gconnect():
 	output += '!</h1>'
 	output += '<img src="'
 	output += login_session['picture']
-	output += ' " style = "width: 200px; height: 200px;border-radius: 150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
+	output += ' " style = "width: 150px; height: 150px;border-radius: 150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
 	flash("You are now logged in as %s" % login_session['username'])
 	print "done!"
 	return output
@@ -156,7 +156,7 @@ def gdisconnect():
 		response = make_response(
 			json.dumps('Failed to revoke token for given user.', 400))
 		response.headers['Content-Type'] = 'application/json'
-		flash("log out failed")
+		flash("Log out failed")
 		return redirect(url_for('showCategories'))
 
 
@@ -185,16 +185,22 @@ def getUserID(email):
 
 @app.route('/login')
 def showLogin():
+	'''
+	Renders the page for login.
+	'''
 	state = ''.join(random.choice(string.ascii_uppercase + string.digits)
 		for x in xrange(32))
 	login_session['state'] = state
 	# RENDER LOGIN TEMPLATE
-	return render_template('login.html', STATE=state)
+	return render_template('newlogin.html', STATE=state, 
+		login_session=login_session)
 
 # JSON APIs to view Category Information
 @app.route('/categories/<int:category_id>/categoryItems/JSON')
 def categoryItemsJSON(category_id):
-    '''Returns JSON objects for all items matching category_id'''	
+    '''
+    Returns JSON objects for all items matching category_id
+    '''	
     category = session.query(Category).filter_by(id=category_id).one()
     items = session.query(Item).filter_by(
         category_id=category.id).all()
@@ -203,14 +209,18 @@ def categoryItemsJSON(category_id):
 
 @app.route('/category/<int:category_id>/item/<int:item_id>/JSON')
 def categoryItemJSON(category_id, item_id):
-	'''Returns JSON representation for a single item matching item_id'''
+	'''
+	Returns JSON representation for a single item matching item_id
+	'''
 	category_item = session.query(Item).filter_by(id=item_id).one()
 	return jsonify(Item=category_item.serialize)
 
 
 @app.route('/categories/JSON')
 def categoriesJSON():
-	'''Returns JSON objects for all categories in catalog'''
+	'''
+	Returns JSON objects for all categories in catalog
+	'''
 	categories = session.query(Category).all()
 	return jsonify(Catergories=[c.serialize for c in categories])
 # END JSON APIs
@@ -219,29 +229,48 @@ def categoriesJSON():
 @app.route('/')
 @app.route('/categories/')
 def showCategories():
-	'''Shows all the categories in database.'''
+	'''
+	Shows all the categories in database by alphabetical order.
+	'''
 	categories=session.query(Category).order_by(asc(Category.name))
-	return render_template('categories.html', categories=categories)
+	if 'username' not in login_session:
+		return render_template('guestcategories.html', categories=categories,
+			login_session=login_session)
+	else:
+		return render_template('categories.html', categories=categories,
+			login_session=login_session)
 
 
 @app.route('/categories/new/', methods=['GET', 'POST'])
 def addCategory():
-	'''Adds a new category to the existing database.'''
+	'''
+	Adds a new category to the existing database.
+	'''
+	if 'username' not in login_session:
+		return redirect('/login')
 	if request.method == 'POST':
-		newCategory=Category(name=request.form['name'], img_url=
-			request.form['img_url'])
-		session.add(newCategory)
-		session.commit()
+		if request.form['name']:
+			newCategory=Category(name=request.form['name'], img_url=request.form['img_url'],
+				user_id=login_session['user_id'])
+			session.add(newCategory)
+			session.commit()
 		flash("You added a new category to the catalog.")
-		return redirect(url_for('showCategories'))
+		return redirect(url_for('showCategories', login_session=login_session))
 	else:
-		return render_template('newcategory.html')
+		return render_template('newcategory.html', login_session=login_session)
 
 
 @app.route('/categories/<int:category_id>/edit/', methods=['GET', 'POST'])
 def editCategory(category_id):
-	'''Makes changes to an existing category in the database.'''
+	'''
+	Makes changes to an existing category in the database.
+	'''
+	if 'username' not in login_session:
+		return redirect('/login')
 	editedCategory=session.query(Category).filter_by(id=category_id).one()
+	if editedCategory.user_id != login_session['user_id']:
+		flash("You cannot edit this category. Catergories can only be modified by their owners. Create a category of your own to modify.")
+		return redirect(url_for('showCategories'))
 	if request.method == 'POST':
 		if request.form['name']:
 			editedCategory.name=request.form['name']
@@ -252,13 +281,21 @@ def editCategory(category_id):
 		flash("You have made changes to a category.")
 		return redirect(url_for('showCategories'))
 	else:
-		return render_template('editcategory.html', category=editedCategory)
+		return render_template('editcategory.html', category=editedCategory,
+			login_session=login_session)
 
 
 @app.route('/categories/<int:category_id>/delete/', methods=['GET','POST'])
 def deleteCategory(category_id):
-	'''Removes an existing category from the database.'''
+	'''
+	Removes an existing category from the database.
+	'''
+	if 'username' not in login_session:
+		return redirect('/login')
 	categoryToDelete=session.query(Category).filter_by(id=category_id).one()
+	if categoryToDelete.user_id != login_session['user_id']:
+		flash("You cannot delete this category. Catergories can only be deleted by their owners.")
+		return redirect(url_for('showCategories'))
 	if request.method == 'POST':
 		session.delete(categoryToDelete)
 		session.commit()
@@ -266,49 +303,66 @@ def deleteCategory(category_id):
 		return redirect(url_for('showCategories'))
 	else:
 		return render_template('deletecategory.html',
-			category=categoryToDelete)
+			category=categoryToDelete, login_session=login_session)
 
 
 @app.route('/categories/<int:category_id>/')
 @app.route('/categories/<int:category_id>/show')
 def showItems(category_id):
-	'''Shows all the items that belong to category matching category_id.'''
+	'''
+	Shows all the items that belong to category matching category_id.
+	'''
 	categoryToShow=session.query(Category).filter_by(
 		id=category_id).one()
 	categoryItems=session.query(Item).filter_by(
 		category_id=category_id).order_by(asc(Item.name))
 	return render_template('showitems.html', category=categoryToShow,
-		items=categoryItems)
+		items=categoryItems, login_session=login_session)
 
 
 @app.route('/categories/<int:newItemCategory_id>/new/',
 	methods=['GET','POST'])
 def addItem(newItemCategory_id):
-	'''Adds an item to category matching newItemCategory_id.'''
-	categoryToShow=session.query(Category).filter_by(
+	'''
+	Adds an item to category matching newItemCategory_id.
+	'''
+	if 'username' not in login_session:
+		return redirect('/login')
+	category=session.query(Category).filter_by(
 		id=newItemCategory_id).one()
+	if login_session['user_id'] != category.user_id:
+		flash("Only the owner of %s category may add an item to it." % category.name)
+		return redirect(url_for('showItems', category_id=category.id))
 	if request.method == 'POST':
 		newItem=Item(
 			name=request.form['name'],
 			description=request.form['description'],
 			price=request.form['price'],
 			img_url=request.form['img_url'],
-			category_id=categoryToShow.id)
+			category_id=category.id)
 		session.add(newItem)
 		session.commit()
 		flash("A new item has been added to this category.")
-		return redirect(url_for('showItems', category_id=categoryToShow.id))
+		return redirect(url_for('showItems', category_id=category.id))
 	else:
-		return render_template('newitem.html', category=categoryToShow)
+		return render_template('newitem.html', category=category,
+			login_session=login_session)
 
 
 @app.route('/categories/<int:category_id>/<int:item_id>/edit/',
 	methods=['GET','POST'])
 def editItem(category_id, item_id):
-	'''Edits item with matching item_id.'''
+	'''
+	Edits item with matching item_id.
+	'''
+	if 'username' not in login_session:
+		return redirect('/login')
 	itemToEdit=session.query(Item).filter_by(id=item_id).one()
 	belongsToCategory=session.query(Category).filter_by(
 		id=itemToEdit.category_id).one()
+	if login_session['user_id'] != itemToEdit.user_id:
+		flash("Only the owner of %s category may edit this item." % belongsToCategory.name)
+		return redirect(url_for('showItems', category_id=belongsToCategory.id))
 	if request.method == 'POST':
 		if request.form['name']:
 			itemToEdit.name=request.form['name']
@@ -323,21 +377,30 @@ def editItem(category_id, item_id):
 		flash("You have made changes to an item in this category.")
 		return redirect(url_for('showItems', category_id=category_id))
 	else:
-		return render_template('edititem.html', item=itemToEdit)
+		return render_template('edititem.html', item=itemToEdit,
+			login_session=login_session)
 
 
 @app.route('/categories/<int:category_id>/<int:item_id>/delete/',
 	methods=['GET','POST'])
 def deleteItem(category_id, item_id):
-	'''Removes item matching item_id from database.'''
+	'''
+	Removes item matching item_id from database.
+	'''
+	if 'username' not in login_session:
+		return redirect('/login')
 	itemToDelete=session.query(Item).filter_by(id=item_id).one()
+	if login_session['user_id'] != itemToDelete.user_id:
+		flash("Only the owner of %s category may remove this item." % belongsToCategory.name)
+		return redirect(url_for('showItems', category_id=belongsToCategory.id))
 	if request.method == 'POST':
 		session.delete(itemToDelete)
 		session.commit()
 		flash("You have removed an item in this category.")
 		return redirect(url_for('showItems', category_id=category_id))
 	else:
-		return render_template('deleteitem.html', item=itemToDelete)
+		return render_template('deleteitem.html', item=itemToDelete,
+			login_session=login_session)
 
 
 if __name__ == '__main__':
