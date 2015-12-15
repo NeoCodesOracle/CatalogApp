@@ -6,7 +6,7 @@
       {% for message in messages %}
         <div class="alert alert-success">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          <strong>SUCCESS! {{ message }}</strong>
+          <strong>{{ message }}</strong>
         </div>
       {% endfor %}
     {% endif %}
@@ -14,10 +14,10 @@
   </div>
   {% for category in categories %}
     {# Test index for beginning of road and if so, output opening div #}
-    {% if (loop.index % 3) == 1 %}
-      <div class="row">
+    {% if (loop.index % 4) == 1 %}
+      <div class="row text-center">
     {% endif %}
-        <div class="col-sm-4">
+        <div class="col-sm-3">
           <div class="panel panel-primary hvr-float-shadow">
             <div class="panel-heading">{{category.name}}</div>
               <div class="panel-body">
@@ -34,11 +34,11 @@
           </div>
         </div>
     {# Test index after 3rd iteration to close out row #}
-    {% if (loop.index % 3) == 0 %}
+    {% if (loop.index % 4) == 0 %}
       </div>
     {# If we are at the end of the list pad remaining columns - if needed #}
     {% elif ((loop.length + 1) - loop.index) == 0 %}
-      {%for number in range( 3 - ((loop.length + 1) % 3)) %}
+      {%for number in range( 4 - ((loop.length + 1) % 4)) %}
         <div class="col-sm-4"></div>
       {% endfor %}
       </div>
