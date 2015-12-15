@@ -1,0 +1,48 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="row">
+        <div class="alert alert-danger alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+            <strong>You must login to have full access!</strong>
+        </div>
+</div>
+{% for category in categories %}
+    {# Test index for beginning of road and if so, output opening div #}
+    {% if (loop.index % 4) == 1 %}
+      <div class="row text-center">
+    {% endif %}
+        <div class="col-sm-3">
+          <div class="panel panel-primary hvr-float-shadow">
+            <div class="panel-heading">{{category.name}}</div>
+              <div class="panel-body">
+                <a href='{{url_for('showItems', category_id = category.id)}}'>
+                  <img src="{{category.img_url}}" class="img-responsive cat-img" style="width:100%" alt="{{category.name}} Image">
+                </a>
+              </div>
+                <a href='{{url_for('deleteCategory', category_id = category.id)}}'>
+                  <span class="glyphicon glyphicon-remove pull-right mod-links"></span>
+                </a>
+                <a href='{{url_for('editCategory', category_id = category.id)}}'>
+                  <span class="glyphicon glyphicon-pencil pull-right mod-links"></span>
+                </a>
+          </div>
+        </div>
+    {# Test index after 3rd iteration to close out row #}
+    {% if (loop.index % 4) == 0 %}
+      </div>
+    {# If we are at the end of the list pad remaining columns - if needed #}
+    {% elif ((loop.length + 1) - loop.index) == 0 %}
+      {%for number in range( 4 - ((loop.length + 1) % 4)) %}
+        <div class="col-sm-4"></div>
+      {% endfor %}
+      </div>
+    {% endif %}
+
+  {% else %}
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>There are no categories to display.</strong>
+    </div>
+  {% endfor %}
+{% endblock %}
