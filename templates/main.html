@@ -86,9 +86,10 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         {% if not login_session['user_id'] %}
-            <li class="hvr-glow"><a href="{{url_for('showLogin')}}"><span class="glyphicon glyphicon-user"></span>&nbsp;Login</a></li>
+            <li><a href="{{url_for('showLogin')}}"><span class="glyphicon glyphicon-user"></span>&nbsp;Login</a></li>
         {% else %}
-            <li class="hvr-glow"><a href="{{url_for('gdisconnect')}}"><strong>Logout</strong></a></li>
+            <li>
+              <a href="{{url_for('disconnect')}}"><strong>Logout</strong></a></li>
             <li><img src="{{login_session['picture']}}" alt="User Image" class="img-circle"></li>
         {% endif %}
         <!--            -->          
