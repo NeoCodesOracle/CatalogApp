@@ -1,7 +1,7 @@
 {% extends "main.html" %}
 {% block content %} 
 <div class="row">
-  <h3>Login to continue using application</h3><hr />
+  <h3>Login to continue</h3><hr />
 <!-- GOOGLE PLUS SIGN IN-->
 <div id="signInButton">
   <span class="g-signin"
@@ -52,7 +52,7 @@ function signInCallback(authResult) {
 <script>
   window.fbAsyncInit = function() {
   FB.init({
-    appId      : '1661123797479440',
+    appId      : '106685886371995',
     cookie     : true,  // enable cookies to allow the server to access 
                         // the session
     xfbml      : true,  // parse social plugins on this page
@@ -86,7 +86,7 @@ function signInCallback(authResult) {
         if (result) {
           $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
          setTimeout(function() {
-          window.location.href = "/categories/";
+          window.location.href = "/categories";
          }, 4000);
           
       } else {
@@ -111,6 +111,7 @@ function signInCallback(authResult) {
 
         </button>
 <!--END FACEBOOK SIGN IN -->
+
 
 </div>
 {% endblock %}
