@@ -52,6 +52,15 @@ small {
     font-size: 12px;
     padding: 0px 7px 30px 7px;
 }
-.img-circle, .cat-img {
+.img-circle {
+    max-height: 44px;
+    padding-top: 3px;
+}
+.cat-img {
     max-height: 164px;
+}
+.thumbnail > img {
+    display: block;
+    width: auto;
+    max-height: 175px;
 }
