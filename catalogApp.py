@@ -35,6 +35,9 @@ session=DBSession()
 
 @app.route('/fbconnect', methods=['POST'])
 def fbconnect():
+    '''
+    Connects a user using their Facebook account.
+    '''
     if request.args.get('state') != login_session['state']:
         response = make_response(json.dumps('Invalid state parameter.'), 401)
         response.headers['Content-Type'] = 'application/json'
@@ -101,6 +104,9 @@ def fbconnect():
 
 @app.route('/fbdisconnect')
 def fbdisconnect():
+    '''
+    Disconnects a user using their Facebook account.
+    '''
     facebook_id = login_session['facebook_id']
     # The access token must me included to successfully logout
     access_token = login_session['access_token']
@@ -112,6 +118,9 @@ def fbdisconnect():
 
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
+    '''
+    Connects a user using their Google account.
+    '''
     # Validate state token
     if request.args.get('state') != login_session['state']:
         response = make_response(json.dumps('Invalid state parameter.'), 401)
@@ -203,6 +212,9 @@ def gconnect():
 
 @app.route('/gdisconnect')
 def gdisconnect():
+    '''
+    Disconnects a user from Google if signed in under that account.
+    '''
     # Only disconnect a connected user.
     credentials = login_session.get('credentials')
     if credentials is None:
@@ -331,6 +343,9 @@ def categoriesJSON():
 # XML ENDPOINTS
 @app.route('/categories/items/XML')
 def allItemsXML():
+    '''
+    Returns endpoints in XML format.
+    '''
     items = session.query(Item).all()
     return render_template('items.xml',items=items)
     
@@ -364,7 +379,7 @@ def addCategory():
 				user_id=login_session['user_id'])
 			session.add(newCategory)
 			session.commit()
-		flash("You added a new category to the catalog.")
+		flash("You added a new category to the catalog.","success")
 		return redirect(url_for('showCategories', login_session=login_session))
 	else:
 		return render_template('newcategory.html', login_session=login_session)
@@ -378,7 +393,9 @@ def editCategory(category_id):
 	'''
 	editedCategory=session.query(Category).filter_by(id=category_id).one()
 	if editedCategory.user_id != login_session['user_id']:
-		flash("You cannot edit this category. Catergories can only be modified by their owners. Create a category of your own to modify.")
+		flash("You cannot edit this category. Catergories can only be"
+            " modified by their owners. Create a category of your own"
+            " to modify.","error")
 		return redirect(url_for('showCategories'))
 	if request.method == 'POST':
 		if request.form['name']:
@@ -387,7 +404,7 @@ def editCategory(category_id):
 			editedCategory.img_url=request.form['img_url']
 		session.add(editedCategory)
 		session.commit()
-		flash("You have made changes to a category.")
+		flash("You have made changes to a category.","success")
 		return redirect(url_for('showCategories'))
 	else:
 		return render_template('editcategory.html', category=editedCategory,
@@ -402,12 +419,13 @@ def deleteCategory(category_id):
 	'''
 	categoryToDelete=session.query(Category).filter_by(id=category_id).one()
 	if categoryToDelete.user_id != login_session['user_id']:
-		flash("You cannot delete this category. Catergories can only be deleted by their owners.")
+		flash("You cannot delete this category. Catergories can only be "
+            "deleted by their owners.", "info")
 		return redirect(url_for('showCategories'))
 	if request.method == 'POST':
 		session.delete(categoryToDelete)
 		session.commit()
-		flash("You have deleted a category.")
+		flash("You have deleted a category.", "danger")
 		return redirect(url_for('showCategories'))
 	else:
 		return render_template('deletecategory.html',
@@ -417,15 +435,15 @@ def deleteCategory(category_id):
 @app.route('/categories/<int:category_id>/')
 @app.route('/categories/<int:category_id>/show')
 def showItems(category_id):
-	'''
-	Shows all the items that belong to category matching category_id.
-	'''
-	categoryToShow=session.query(Category).filter_by(
-		id=category_id).one()
-	categoryItems=session.query(Item).filter_by(
-		category_id=category_id).order_by(asc(Item.name))
-	return render_template('showitems.html', category=categoryToShow,
-		items=categoryItems, login_session=login_session)
+    '''
+    Shows all the items that belong to category matching category_id.
+    '''
+    categoryToShow=session.query(Category).filter_by(
+        id=category_id).one()
+    categoryItems=session.query(Item).filter_by(
+        category_id=category_id).order_by(asc(Item.name))
+    return render_template('showitems.html', category=categoryToShow,
+        items=categoryItems, login_session=login_session)
 
 
 @app.route('/categories/<int:newItemCategory_id>/new/',
@@ -438,7 +456,7 @@ def addItem(newItemCategory_id):
 	category=session.query(Category).filter_by(
 		id=newItemCategory_id).one()
 	if login_session['user_id'] != category.user_id:
-		flash("Only the owner of %s category may add an item to it." % category.name)
+		flash("Only the owner of this category may edit this item.", "error")
 		return redirect(url_for('showItems', category_id=category.id))
 	if request.method == 'POST':
 		newItem=Item(
@@ -468,7 +486,7 @@ def editItem(category_id, item_id):
 	belongsToCategory=session.query(Category).filter_by(
 		id=itemToEdit.category_id).one()
 	if login_session['user_id'] != itemToEdit.user_id:
-		flash("Only the owner of %s category may edit this item." % belongsToCategory.name)
+		flash("Only the owner of this category may edit this item.", "error")
 		return redirect(url_for('showItems', category_id=belongsToCategory.id))
 	if request.method == 'POST':
 		if request.form['name']:
@@ -496,10 +514,8 @@ def deleteItem(category_id, item_id):
 	Removes item matching item_id from database.
 	'''
 	itemToDelete=session.query(Item).filter_by(id=item_id).one()
-	belongsToCategory=session.query(Category).filter_by(
-		id=category_id).one()
 	if login_session['user_id'] != itemToDelete.user_id:
-		flash("Only the owner of %s category may remove this item." % belongsToCategory.name)
+		flash("Only the owner of this category may remove this item.", "error")
 		return redirect(url_for('showItems', category_id=category_id))
 	if request.method == 'POST':
 		session.delete(itemToDelete)
