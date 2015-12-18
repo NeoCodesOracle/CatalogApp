@@ -56,14 +56,14 @@ session.commit()
 
 item2 = Item(
        user_id=1,
-       name="Adidas Kids' Messi 15.3 IN J Low Soccer Shoes",
+       name="Nike Kids' Messi 15.3 IN J Low Soccer Shoes",
        description="Your rising star will play like the pros in these adidas"
               "kids' Messi 15.3 IN J low soccer shoes. They're made with a"
               "3D synthetic leather upper and an indoor-optimized outsole for"
               "total comfort and control even when the pressure's on.",
        price="$55.00",
-       img_url="http://www.sportsauthority.com/graphics/product_images/"
-              "pTSA-19856023nm.jpg",
+       img_url="http://cdn3.volusion.com/goz35.avhz4/v/vspfiles/photos/"
+              "SIYNI579797-703-2.jpg?1381832849",
        category=category1)
 session.add(item2)
 session.commit()
