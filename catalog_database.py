@@ -53,7 +53,7 @@ class Item(Base):
     img_url = Column(String(250))
     category_id = Column(Integer,ForeignKey('category.id'))
     user_id = Column(Integer, ForeignKey('user.id'))
-    category = relationship(Category)
+    category = relationship(Category, cascade='delete')
     user = relationship(User)
 
     @property
