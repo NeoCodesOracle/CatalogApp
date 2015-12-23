@@ -91,9 +91,9 @@ You should see the application along with dummy data (if installed).
 ## Usage
 
 ## Screenshots
-![App Splash](\static\images\Screenshots\Frontpage.png)
-![App Login](\static\images\Screenshots\login.png)
-![App Categories](\static\images\Screenshots\cats.png)
+![App Splash](.\static\images\Screenshots\Frontpage.png)
+![App Login](.\static\images\Screenshots\login.png)
+![App Categories](.\static\images\Screenshots\cats.png)
 
 ## File Contents
 
