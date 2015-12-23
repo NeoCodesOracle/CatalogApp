@@ -22,8 +22,8 @@ following manner:
 
 Additionally, the application must meet the following minimum requirements:
 
-Criteria 	  |	Description
---------------|-----------------------------------------------------------------
+Criteria 	  		|	Description
+--------------------|-----------------------------------------------------------------
 API Endpoints | Application implements JSON endpoints with all required content.
 CRUD: Read 	  | Application reads category and item information from a database.
 CRUD: Create  |	Application includes a form allowing users to add new items and correctly processes submitted forms.
