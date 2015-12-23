@@ -32,8 +32,7 @@ CRUD: Delete  					| Application includes a function to delete a current record.
 Authentication & Authorization  | Application implements a third-party authentication and authorization service; and create, delete and update operations do consider authorization status prior to execution. Make sure there is a ‘Login’ and ‘Logout’ button/link in the project. The aesthetics of this button/link is open for you to design.
 Code Quality  					| Code is ready for personal review and neatly formatted.
 Comments 	  					| Comments are present and effectively explain longer code procedures.
-Documentation 					| A README file (this document you are reading) is included detailing all steps required to successfully
-								| run the application.
+Documentation 					| A README file (this document you are reading) is included detailing all steps required to successfully run the application.
 
 ## Requirements
 
@@ -44,7 +43,7 @@ The following are required to run the application:
 3. Download and install Virtual Box (Download here - https://www.virtualbox.org/)
 4. Download and install Python 2.7.6 (Download here - https://www.python.org/downloads/)
 	||-- Flask (0.10.1) - Install from command line by entering command 
-							'<pip install Flask>'
+							'pip install Flask'
 5. Your favorite web browser.
 
 ## Installation
@@ -61,11 +60,11 @@ a snap. Just follow the steps below:
 	* Example: cd Desktop/ (this will make your desktop the current directory.)
 ##### 3. Clone Repository
 At the terminal prompt, run the following command:
-	'<git clone https://github.com/NeoCodesOracle/CatalogApp.git>'
+	'git clone https://github.com/NeoCodesOracle/CatalogApp.git'
 This will copy the folder containing all application files to your desktop (or whatever you working directory is)
 ##### 4. Change Directory
 After cloning directory, you will need to navigate to it by entering the following command at the prompt:
-	'<cd catalogapp>'
+	'cd catalogapp'
 You are now in the catalogapp directory.
 
 ### Run Application
@@ -88,11 +87,11 @@ You should see the application along with dummy data (if installed).
 ## Usage
 
 ## Screenshots
-CatalogApp Landing Page
+_**CatalogApp Landing Page**_
 ![App Splash](https://github.com/NeoCodesOracle/CatalogApp/blob/master/static/images/Screenshots/Frontpage.png)
-CatalogApp Login Prompt
+_**CatalogApp Login Prompt**_
 ![App Login](https://github.com/NeoCodesOracle/CatalogApp/blob/master/static/images/Screenshots/login.png)
-CatalogApp Add Categories Page
+_**CatalogApp Add Categories Page**_
 ![App Categories](https://github.com/NeoCodesOracle/CatalogApp/blob/master/static/images/Screenshots/cats.png)
 
 ## File Contents
