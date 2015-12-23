@@ -27,12 +27,9 @@ Criteria 	  					|				Description
 API Endpoints 					| Application implements JSON endpoints with all required content.
 CRUD: Read 	  					| Application reads category and item information from a database.
 CRUD: Create  					| Application includes a form allowing users to add new items and correctly processes submitted forms.
-CRUD: Update  					| Application includes a function to edit/update a current record in the database table and correctly
-								| proceses submitted forms.
+CRUD: Update  					| Application includes a function to edit/update a current record in the database table and correctly proceses submitted forms.
 CRUD: Delete  					| Application includes a function to delete a current record.
-Authentication & Authorization  | Application implements a third-party authentication and authorization service; and create, delete and
-								| update operations do consider authorization status prior to execution. Make sure there is a ‘Login’
-								| and ‘Logout’ button/link in the project. The aesthetics of this button/link is open for you to design.
+Authentication & Authorization  | Application implements a third-party authentication and authorization service; and create, delete and update operations do consider authorization status prior to execution. Make sure there is a ‘Login’ and ‘Logout’ button/link in the project. The aesthetics of this button/link is open for you to design.
 Code Quality  					| Code is ready for personal review and neatly formatted.
 Comments 	  					| Comments are present and effectively explain longer code procedures.
 Documentation 					| A README file (this document you are reading) is included detailing all steps required to successfully
@@ -91,9 +88,12 @@ You should see the application along with dummy data (if installed).
 ## Usage
 
 ## Screenshots
-![App Splash](.\static\images\Screenshots\Frontpage.png)
-![App Login](.\static\images\Screenshots\login.png)
-![App Categories](.\static\images\Screenshots\cats.png)
+CatalogApp Landing Page
+![App Splash](https://github.com/NeoCodesOracle/CatalogApp/blob/master/static/images/Screenshots/Frontpage.png)
+CatalogApp Login Prompt
+![App Login](https://github.com/NeoCodesOracle/CatalogApp/blob/master/static/images/Screenshots/login.png)
+CatalogApp Add Categories Page
+![App Categories](https://github.com/NeoCodesOracle/CatalogApp/blob/master/static/images/Screenshots/cats.png)
 
 ## File Contents
 
