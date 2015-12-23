@@ -3,6 +3,9 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
 
+#import to delete children after parent is deleted
+from sqlalchemy.orm import backref
+
 Base = declarative_base()
 
 
@@ -56,7 +59,7 @@ class Item(Base):
     img_url = Column(String(250))
     category_id = Column(Integer, ForeignKey('category.id'))
     user_id = Column(Integer, ForeignKey('user.id'))
-    category = relationship(Category, cascade='delete')
+    category = relationship(Category, backref=backref("children", cascade="all,delete"))
     user = relationship(User)
 
 
