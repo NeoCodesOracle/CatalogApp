@@ -60,27 +60,27 @@ a snap. Just follow the steps below:
 	* Example: cd Desktop/ (this will make your desktop the current directory.)
 ##### 3. Clone Repository
 At the terminal prompt, run the following command:
-	'git clone https://github.com/NeoCodesOracle/CatalogApp.git'
+	>git clone https://github.com/NeoCodesOracle/CatalogApp.git
 This will copy the folder containing all application files to your desktop (or whatever you working directory is)
 ##### 4. Change Directory
 After cloning directory, you will need to navigate to it by entering the following command at the prompt:
-	'cd catalogapp'
+	>cd catalogapp
 You are now in the catalogapp directory.
 
 ### Run Application
 You are now ready to launch application. Type the following commands at the prompt as they appear below:
 
-##### 1. python catalog_database.py
+##### 1. >python catalog_database.py
 This command will set up the database for the application to store the categories and items that will be
 created during runtime.
-##### 2. python populate_database.py (OPTIONAL)
+##### 2. >python populate_database.py (OPTIONAL)
 This command will populate your database with dummy categories and items for you to interact with. It is suggested
 that you run this command in order to ensure testing deletion and modification of other user's data.
-##### 3. python catalogApp.py
+##### 3. >python catalogApp.py
 This command will launch the server, which will serve our application on port 5000
 ##### 4. View Application in Browser
 Open your favorite web browser and type the following in the address bar: 
-http://localhost:5000/
+>http://localhost:5000/
 You should see the application along with dummy data (if installed).
 
 
