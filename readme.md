@@ -94,11 +94,11 @@ You should see the application along with dummy data (if installed).
 * You will still not be able to modify categories that belong to other users.
 
 ## Screenshots
-_**CatalogApp Landing Page**_
+**CatalogApp Landing Page**
 ![App Splash](https://github.com/NeoCodesOracle/CatalogApp/blob/master/static/images/Screenshots/Frontpage.png)
-_**CatalogApp Login Prompt**_
+**CatalogApp Login Prompt**
 ![App Login](https://github.com/NeoCodesOracle/CatalogApp/blob/master/static/images/Screenshots/login.png)
-_**CatalogApp Add Categories Page**_
+**CatalogApp Add Categories Page**
 ![App Categories](https://github.com/NeoCodesOracle/CatalogApp/blob/master/static/images/Screenshots/cats.png)
 
 ## File Contents
@@ -119,7 +119,7 @@ CATALOG
 |		└───IMAGES
 |			  |  logo.ico
 |			  └  SCREENSHOTS
-├───TEMPLATES
+└───TEMPLATES
 		|  categories.html
 		|  deletecategory.html
 		|  deleteitem.html
@@ -133,7 +133,7 @@ CATALOG
 		|  newitem.html
 		|  newlogin.html
 		└  showitems.html
-<pre>
+</pre>
 
 ##Credits
 
