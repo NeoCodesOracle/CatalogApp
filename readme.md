@@ -70,15 +70,15 @@ You are now in the catalogapp directory.
 ### Run Application
 You are now ready to launch application. Type the following commands at the prompt as they appear below:
 
-1. > python catalog_database.py
+> python catalog_database.py
 This command will set up the database for the application to store the categories and items that will be
 created during runtime.
-2. > python populate_database.py (OPTIONAL)
+> python populate_database.py (OPTIONAL)
 This command will populate your database with dummy categories and items for you to interact with. It is suggested
 that you run this command in order to ensure testing deletion and modification of other user's data.
-3. > python catalogApp.py
+> python catalogApp.py
 This command will launch the server, which will serve our application on port 5000
-4. View Application in Browser
+###### View Application in Browser
 Open your favorite web browser and type the following in the address bar: 
 > http://localhost:5000/
 You should see the application along with dummy data (if installed).
@@ -118,7 +118,10 @@ CATALOG
 |		|     hover-min.css
 |		└───IMAGES
 |			  |  logo.ico
-|			  └  SCREENSHOTS
+|			  ├───SCREENSHOTS
+|			  		|	 cats.png
+|			  		|    frontpage.png
+|			  		└    login.png       
 └───TEMPLATES
 		|  categories.html
 		|  deletecategory.html
