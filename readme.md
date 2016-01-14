@@ -104,35 +104,36 @@ _**CatalogApp Add Categories Page**_
 ## File Contents
 '''
 CATALOG
-├───catalogApp.py
-├───catalog_database.py
-├───populate_database.py
-├───readme.md
+|  catalogApp.py
+|  catalog_database.py
+|  populate_database.py
+|  readme.md
+|
 ├───STATIC
 |		├───CSS
-|		|	  ├───bootstrap.min
-|		|	  ├───catalog.css
-|		|     ├───demo-page.css
-|		|     ├───hover.css
-|		|     ├───hover-min.css
-|		├───IMAGES
-|			  ├───logo.ico
-|			  ├───SCREENSHOTS
+|		|	  bootstrap.min
+|		|	  catalog.css
+|		|     demo-page.css
+|		|     hover.css
+|		|     hover-min.css
+|		└───IMAGES
+|			  |  logo.ico
+|			  └  SCREENSHOTS
 |	
 ├───TEMPLATES
-		├───categories.html
-		├───deletecategory.html
-		├───deleteitem.html
-		├───editcategory.html
-		├───edititem.html
-		├───guestcategories.html
-		├───items.xml
-		├───login.html
-		├───main.html
-		├───newcategory.html
-		├───newitem.html
-		├───newlogin.html
-		├───showitems.html
+		|  categories.html
+		|  deletecategory.html
+		|  deleteitem.html
+		|  editcategory.html
+		|  edititem.html
+		|  guestcategories.html
+		|  items.xml
+		|  login.html
+		|  main.html
+		|  newcategory.html
+		|  newitem.html
+		|  newlogin.html
+		└  showitems.html
 '''
 
 ##Credits
