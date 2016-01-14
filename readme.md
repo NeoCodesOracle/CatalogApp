@@ -43,8 +43,7 @@ The following are required to run the application:
 3. Download and install Vagrant (Download here - https://www.vagrantup.com/)
 4. Download and install Virtual Box (Download here - https://www.virtualbox.org/)
 5. Download and install Python 2.7.6 (Download here - https://www.python.org/downloads/)
-
-> Flask (0.10.1) - Install from command line by entering command 
+6. Flask (0.10.1) - The python framework. Install from command line by entering command 
 
 '''
 pip install Flask
@@ -68,6 +67,7 @@ At the terminal prompt, run the following command:
 >git clone https://github.com/NeoCodesOracle/CatalogApp.git
 
 This will copy the folder containing all application files to your desktop (or whatever you working directory is)
+
 ###### 4. Change Directory
 After cloning directory, you will need to navigate to it by entering the following command at the prompt:
 	>cd catalogapp
@@ -169,7 +169,7 @@ limitation the rights to use, copy, modify, merge, publish, distribute, sublicen
 Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all copies or substantial 
-portions of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED,
+portions of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESSED OR IMPLIED,
 INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND 
 NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
