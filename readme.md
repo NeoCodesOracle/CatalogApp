@@ -44,7 +44,7 @@ The following are required to run the application:
 4. Download and install Python 2.7.6 (Download here - https://www.python.org/downloads/)
 	||-- Flask (0.10.1) - Install from command line by entering command 
 							'pip install Flask'
-5. Your favorite web browser.
+5. The latest version of your favorite web browser.
 
 ## Installation
 
@@ -102,7 +102,7 @@ _**CatalogApp Add Categories Page**_
 ![App Categories](https://github.com/NeoCodesOracle/CatalogApp/blob/master/static/images/Screenshots/cats.png)
 
 ## File Contents
-
+'
 CATALOG
 ├───catalogApp.py
 ├───catalog_database.py
@@ -133,6 +133,7 @@ CATALOG
 		├───newitem.html
 		├───newlogin.html
 		├───showitems.html
+'
 
 ##Credits
 
