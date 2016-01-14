@@ -23,7 +23,7 @@ following manner:
 Additionally, the application must meet the following minimum requirements:
 
 Criteria 	  					|				Description
---------------------------------|----------------------------------------------------------------------------------------------------
+:--------------------------------:|----------------------------------------------------------------------------------------------------
 API Endpoints 					| Application implements JSON endpoints with all required content.
 CRUD: Read 	  					| Application reads category and item information from a database.
 CRUD: Create  					| Application includes a form allowing users to add new items and correctly processes submitted forms.
@@ -42,7 +42,7 @@ The following are required to run the application:
 2. Download and install Vagrant (Download here - https://www.vagrantup.com/)
 3. Download and install Virtual Box (Download here - https://www.virtualbox.org/)
 4. Download and install Python 2.7.6 (Download here - https://www.python.org/downloads/)
-	||-- Flask (0.10.1) - Install from command line by entering command 
+> Flask (0.10.1) - Install from command line by entering command 
 							'pip install Flask'
 5. The latest version of your favorite web browser.
 
