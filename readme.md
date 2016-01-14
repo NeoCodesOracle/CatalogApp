@@ -113,7 +113,6 @@ CATALOG
 |  catalog_database.py
 |  populate_database.py
 |  readme.md
-|
 ├───STATIC
 |		├───CSS
 |		|	  bootstrap.min
@@ -123,7 +122,7 @@ CATALOG
 |		|     hover-min.css
 |		└───IMAGES
 |			  |  logo.ico
-|			  ├───SCREENSHOTS
+|			  └───SCREENSHOTS
 |			  		|	 cats.png
 |			  		|    frontpage.png
 |			  		└    login.png       
@@ -142,7 +141,6 @@ CATALOG
 		|  newlogin.html
 		└  showitems.html
 </pre>
-
 ##Credits
 
 Created by NeoCodesOracle. Makes use of Ian Lunn's Hover CSS effects (https://github.com/IanLunn/Hover). Contains code provided by Udacity. Built using Bootstrap.
