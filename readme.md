@@ -38,15 +38,17 @@ Documentation 					| A README file (this document you are reading) is included d
 
 The following are required to run the application:
 
-1. Download and install Git (Download here - http://git-scm.com/downloads/)
-2. Download and install Vagrant (Download here - https://www.vagrantup.com/)
-3. Download and install Virtual Box (Download here - https://www.virtualbox.org/)
-4. Download and install Python 2.7.6 (Download here - https://www.python.org/downloads/)
+1. The latest version of your favorite web browser.
+2. Download and install Git (Download here - http://git-scm.com/downloads/)
+3. Download and install Vagrant (Download here - https://www.vagrantup.com/)
+4. Download and install Virtual Box (Download here - https://www.virtualbox.org/)
+5. Download and install Python 2.7.6 (Download here - https://www.python.org/downloads/)
 
 > Flask (0.10.1) - Install from command line by entering command 
-							'pip install Flask'
 
-5. The latest version of your favorite web browser.
+'''
+pip install Flask
+''
 
 ## Installation
 
