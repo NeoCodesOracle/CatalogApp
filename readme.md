@@ -47,7 +47,7 @@ The following are required to run the application:
 
 '''
 pip install Flask
-''
+'''
 
 ## Installation
 
