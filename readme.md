@@ -102,7 +102,7 @@ _**CatalogApp Add Categories Page**_
 ![App Categories](https://github.com/NeoCodesOracle/CatalogApp/blob/master/static/images/Screenshots/cats.png)
 
 ## File Contents
-'
+'''
 CATALOG
 ├───catalogApp.py
 ├───catalog_database.py
@@ -133,7 +133,7 @@ CATALOG
 		├───newitem.html
 		├───newlogin.html
 		├───showitems.html
-'
+'''
 
 ##Credits
 
