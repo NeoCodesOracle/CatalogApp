@@ -43,9 +43,7 @@ The following are required to run the application:
 3. Download and install Vagrant (Download here - https://www.vagrantup.com/)
 4. Download and install Virtual Box (Download here - https://www.virtualbox.org/)
 5. Download and install Python 2.7.6 (Download here - https://www.python.org/downloads/)
-6. Flask (0.10.1) - The python framework. Install from command line by entering command 
-
-    pip install Flask
+6. Flask (0.10.1) - The python framework. Install from command line by entering command 'pip install Flask'
 
 ## Installation
 
